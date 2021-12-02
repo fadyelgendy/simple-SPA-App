@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Jobs\createMerchantDatabase;
+use App\Jobs\sendEmailToAdmin;
 use App\Models\Merchant;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,6 +41,8 @@ class MerchantService
 
             $last = Merchant::where('merchant_name', $merchant->merchant_name)
                 ->first();
+
+            sendEmailToAdmin::dispatch($last);
 
             $this->result['success'] = 1;
             $this->result['message'] = "Merchant Data added successfully";
