@@ -38,8 +38,12 @@ class MerchantService
             // Create user database
             createMerchantDatabase::dispatch($merchant);
 
+            $last = Merchant::where('merchant_name', $merchant->merchant_name)
+                ->first();
+
             $this->result['success'] = 1;
             $this->result['message'] = "Merchant Data added successfully";
+            $this->result['data'] = $last;
         }
 
         return $this->result;
