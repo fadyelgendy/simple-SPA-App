@@ -32,11 +32,6 @@
 </template>
 
 <script>
-
-const csrf = document
-    .getElementsByName("csrf-token")[0]
-    .getAttribute("content");
-
 export default {
     name: "MerchantFrom",
     data () {
@@ -54,9 +49,37 @@ export default {
         }
     },
     methods: {
-        handleSubmit(e) {
+        async handleSubmit(e) {
             e.preventDefault();
-            console.log(this.merchant);
+            if (!this.merchant.merchant_name) {
+                return (this.errors.merchant_name = "This field is required");
+            }
+            this.errors.merchant_name = '';
+
+            if (!this.merchant.trade_type) {
+                return (this.errors.trade_type = "This field is required");
+            }
+            this.errors.trade_type = "";
+
+            if (!this.merchant.trade_line) {
+                return (this.errors.trade_line = "This field is required");
+            }
+            this.errors.trade_line = "";
+
+            if (!this.errors.length) {
+                await axios.post("/api/merchants/store", this.merchant).then(res => {
+                    if (!res.data.success) {
+                        console.log(res.data);
+                        this.errors = res.data.errors;
+                    }
+                    else {
+                        this.merchant.merchant_name = '';
+                        this.merchant.trade_line = '';
+                        this.merchant.trade_type = '';
+                        alert('data saved successfully');
+                    }
+                });
+            }
         }
     }
 }
