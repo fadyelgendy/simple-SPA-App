@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+var path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
