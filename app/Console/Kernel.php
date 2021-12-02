@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('command:sendnewtrades')->hourly();
-         $schedule->command('command:informadmin')->hourly();
+         $schedule->command('send:trades')->hourly();
+         $schedule->command('inform:admin')->hourly();
     }
 
     /**

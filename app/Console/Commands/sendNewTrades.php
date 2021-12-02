@@ -12,7 +12,7 @@ class sendNewTrades extends Command
      *
      * @var string
      */
-    protected $signature = 'command:sendnewtrades';
+    protected $signature = 'send:trades';
 
     /**
      * The console command description.

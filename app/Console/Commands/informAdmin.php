@@ -11,7 +11,7 @@ class informAdmin extends Command
      *
      * @var string
      */
-    protected $signature = 'command:informadmin';
+    protected $signature = 'inform:admin';
 
     /**
      * The console command description.
